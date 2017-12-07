@@ -20,6 +20,12 @@ module.exports = {
     module: {
         loaders: [
             {
+                enforce: 'pre',
+                test: /\.js$/,
+                loader: 'eslint-loader',
+                exclude: MODULES_PATH
+            },
+            {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 exclude: MODULES_PATH,
