@@ -16,11 +16,10 @@ $ cd <project-name>
 
 Just in case you do not need some features, different branches are provided in this project.
 
-| Branch | Description                                     |
-|--------|-------------------------------------------------|
-| light  | Pure react project environment with SCSS loader |
-| hmr    | React-hot-loader                                |
-| router | React-router, server render, code-splitting     |
+| Branch | Description                                                    |
+|-----------------------|-------------------------------------------------|
+| react-js-boilerplate  | Pure react project                              |
+| react-js-boilerplate2 | Environment with CSS, SCSS, Eslint              |
 
 ```bash
 $ git checkout <branch>
