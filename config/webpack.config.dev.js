@@ -1,34 +1,23 @@
-const path = require('path');
+const paths = require('./paths');
 const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const MODULES_PATH = '/node_modules';
-const SOURCE_PATH = path.join(__dirname, 'src');
-
-const SOURCE = {
-    ENTRY: path.join(SOURCE_PATH, 'index.js'),
-    TEMPLATE: path.join(SOURCE_PATH, 'index.html'),
-};
-
-const OUTPUT = {
-    PATH: path.join(__dirname, 'dist'),
-    FILENAME: 'bundle.js',
-};
-
-const DEV_SERVER_PORT = 7000;
+const OUTPUT_FILENAME = 'bundle.js';
+const SERVER_PORT = 7000;
 
 module.exports = {
-    entry: SOURCE.ENTRY,
+    entry: paths.entryJS,
     output: {
-        path: OUTPUT.PATH,
-        filename: OUTPUT.FILENAME,
+        path: paths.output,
+        filename: OUTPUT_FILENAME,
     },
     devServer: {
         inline: true,
         hot: true,
-        port: DEV_SERVER_PORT,
-        contentBase: OUTPUT.PATH,
+        port: SERVER_PORT,
+        contentBase: paths.output,
     },
     module: {
         loaders: [
@@ -36,12 +25,12 @@ module.exports = {
                 enforce: 'pre',
                 test: /\.js$/,
                 loader: 'eslint-loader',
-                exclude: MODULES_PATH,
+                exclude: paths.modules,
             },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
-                exclude: MODULES_PATH,
+                exclude: paths.modules,
                 query: {
                     cacheDirectory: true,
                     presets: ['react', ['env', { module: false }]],
@@ -49,11 +38,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                // loader: ['style-loader', 'css-loader'],
-                loader: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: 'css-loader',
-                })),
+                loader: ['style-loader', 'css-loader'],
             },
             {
                 test: /\.scss$/,
@@ -63,14 +48,14 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
+        new UglifyJSPlugin({
+            uglifyOptions: {
                 warnings: false,
             },
         }),
         new ExtractTextPlugin('style.css'),
         new HtmlWebpackPlugin({
-            template: SOURCE.TEMPLATE,
+            template: paths.templateHTML,
         }),
     ],
 };
