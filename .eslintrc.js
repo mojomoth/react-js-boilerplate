@@ -1,21 +1,38 @@
 module.exports = {
-    "extends": "airbnb",
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "eslint-config-airbnb"
+    ],
     "env": {
-        "browser": true
+        "browser": true,
+        "es6": true
     },
-    "settings": { 
-        "import/resolver": "webpack" 
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true,
+            "sourceType": "module",
+            "allowImportExportEverywhere": false
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+    ],
+    "settings": {
+        "import/resolver": "webpack"
     },
     "rules": {
         "indent": [
             "warn",
-            4 
-        ], 
-        "react/jsx-filename-extension": [ 
-            1, 
-            { 
-                "extensions": [".js", ".jsx"] 
-            } 
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [".js", ".jsx"]
+            }
         ],
         "react/prefer-stateless-function": 0
     }
