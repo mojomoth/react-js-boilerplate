@@ -1,7 +1,7 @@
 const paths = require('./paths');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const OUTPUT_FILENAME = 'bundle.js';
@@ -50,12 +50,12 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        warnings: false,
-      },
-    }),
-    new ExtractTextPlugin('style.css'),
+    // new UglifyJSPlugin({
+    //   uglifyOptions: {
+    //     warnings: false,
+    //   },
+    // }),
+    // new ExtractTextPlugin('style.css'),
     new HtmlWebpackPlugin({
       template: paths.templateHTML,
     }),
